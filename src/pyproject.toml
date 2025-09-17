@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pycovdown"
+version = "0.1.0"
+description = "A pytest plugin that generates markdown coverage reports"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "Frey Clante", email = "fclante@gmail.com"},
+]
+dependencies = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "coverage>=7.0.0",
+]
+
+[project.entry-points.pytest11]
+pycovdown = "pycovdown.plugin"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pycovdown"]
