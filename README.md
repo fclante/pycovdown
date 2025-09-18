@@ -1,7 +1,8 @@
 # PyCovDown
 
-[![CI Build](https://github.com/fclante/pycovdown/actions/workflows/ci-build.yaml/badge.svg)](https://github.com/fclante/pycovdown/actions/workflows/ci-build.yaml)
+[![CI Build](https://github.com/fclante/pycovdown/actions/workflows/build.yaml/badge.svg)](https://github.com/fclante/pycovdown/actions/workflows/build.yaml)
 [![license](https://img.shields.io/github/license/fclante/pycovdown.svg)](https://github.com/fclante/pycovdown/blob/main/LICENSE)
+
 Is a pytest plugin that works with coverage.py to generate markdown reports with detailed coverage information showing the uncovered code.
 
 > Example
