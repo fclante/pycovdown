@@ -1,24 +1,80 @@
-name: Build
+name: CI Build
 
 on:
   push:
     paths-ignore:
-      - ".devcontainer/**"
       - .gitignore
-      - "docs/**"
-      - ".github/**"
+      - .github/**
+      - docs/**
       - README.md
 
   pull_request:
-    branches:
-      - main
+      branches:
+        - main
 
   workflow_dispatch:
 
 jobs:
-  wip:
-    name: wip
-    runs-on: ubuntu-latest
+  test:
+    name: Run Tests
+    runs-on: 
+      - ubuntu-latest
+    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
+      - name: Print Environment
+        shell: bash
+        run: env
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pytest pytest-md pytest-cov coverage pytest-emoji
+
+      - name: Run pytest
+        uses: pavelzw/pytest-action@v2
+        with:
+          verbose: true
+          emoji: true
+          job-summary: true
+          click-to-expand: true
+          report-title: 'Test Report'
+
+  release:
+    name: Release new version
+    runs-on: 
+      - ubuntu-latest
+    
+    needs: ['test']
+
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
+    if: github.ref_name == 'main'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests pyyaml
+
+      - name: Zip Contents into pycovdown.zip
+        shell: bash
+        run: |
+          ls -R
+          zip pycovdown.zip -r pycovdown
+
+      - name: Release version
+        shell: bash
+        run: python3 src/tools/create_release.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
