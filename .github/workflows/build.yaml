@@ -71,7 +71,7 @@ jobs:
         shell: bash
         run: |
           ls -R
-          zip pycovdown.zip -r pycovdown
+          zip pycovdown.zip -r src/pycovdown
 
       - name: Release version
         shell: bash
