@@ -1,5 +1,5 @@
 import pytest
-from pycovdown.util import extract_code_sections
+from pycovdown.utils import extract_code_sections
 
 def test_extract_code_sections_empty():
     """Test extraction with empty input."""

@@ -1,6 +1,5 @@
 import sys, os, requests, json
 sys.path.append("./")
-from pycovdown import util
 
 gh_token = os.getenv("GITHUB_TOKEN")
 gh_headers =  {
@@ -61,8 +60,13 @@ def upload_release_asset(org, repo, release_id, file, file_name):
         response.raise_for_status()
 
 
+def read_file(path):
+    with open(path, 'r') as source:
+        filedata = source.read()
+        return filedata
+
 def get_current_version():
-    content = util.read_file('./pyproject.toml')
+    content = read_file('./pyproject.toml')
     element = 'version ='
     lines = content.splitlines()
     value = ''
@@ -93,3 +97,6 @@ def main():
 
 if __name__ == "__main__":  
    main()
+   
+   
+   

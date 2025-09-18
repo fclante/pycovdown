@@ -1,5 +1,5 @@
 from pycovdown.formatter import format_missing_lines
-from pycovdown.util import extract_code_sections
+from pycovdown.utils import extract_code_sections
 import os, re, pytest
 from coverage import Coverage
 
