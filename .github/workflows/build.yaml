@@ -65,7 +65,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests json
+        run: pip install requests
 
       - name: Zip Contents into pycovdown.zip
         shell: bash
