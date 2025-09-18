@@ -65,8 +65,8 @@ def read_file(path):
         filedata = source.read()
         return filedata
 
-def get_current_version():
-    content = read_file('./pyproject.toml')
+def get_current_version(project_path):
+    content = read_file(f'{project_path}/pyproject.toml')
     element = 'version ='
     lines = content.splitlines()
     value = ''
@@ -86,9 +86,10 @@ def get_current_version():
 def main():
     org = str(os.getenv('GITHUB_REPOSITORY', 'fclante/unknown_repo')).split('/')[0]
     repo = str(os.getenv('GITHUB_REPOSITORY', 'fclante/unknown_repo')).split('/')[1]
+    project_path = str(os.getenv('PROJECT_PATH',''))
     print(gh_headers)
 
-    version = get_current_version()
+    version = get_current_version(project_path)
 
     id = create_release(org, repo, version)
 

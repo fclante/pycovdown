@@ -78,3 +78,4 @@ jobs:
         run: python3 src/tools/create_release.py
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          PROJECT_PATH: src
